@@ -1,0 +1,44 @@
+version: '3.11'
+
+networks:
+  custom:
+    name: alluxio-network
+    external: true
+
+services:
+  kdc:
+    image: sequenceiq/kerberos
+    networks:
+      custom:
+    hostname: kdc.${DOMAIN}
+    volumes:
+      - ./entrypoint:/tmp/entrypoint
+      - ./config:/tmp/config
+      - /dev/urandom:/dev/random
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - REALM=${REALM}
+      - DOMAIN_REALM=${DOMAIN}
+      - KDC_ADDRESS=${HOSTNAME}
+      - KERB_MASTER_KEY=masterkey
+      - KERB_ADMIN_USE=admin
+      - KERB_ADMIN_PASS=admin
+    entrypoint: /tmp/entrypoint/kerberos/entrypoint.sh
+
+  namenode:
+    image: apache/hadoop:3
+    networks:
+      custom:
+    hostname: namenode.${DOMAIN}
+    environment:
+      - NAMENODE_FQDN=namenode.${DOMAIN}
+    volumes:
+      - ./entrypoint:/tmp/entrypoint
+      - ./config:/tmp/config
+    entrypoint: /tmp/entrypoint/hadoop/entrypoint.sh
+    
+  datanode:
+    extends:
+      service: namenode
+    hostname: datanode.${DOMAIN}
+
