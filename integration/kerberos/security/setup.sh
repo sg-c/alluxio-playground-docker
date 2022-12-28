@@ -1,5 +1,10 @@
 #!/bin/bash
 
+set -xe
+
+# set PWD
+cd "$(dirname $0)"
+
 # wait for kdc to start and ready
 while [ ! -f /kerberos_initialized ]; do
     sleep 2
