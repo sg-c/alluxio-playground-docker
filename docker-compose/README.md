@@ -8,6 +8,8 @@ When the container of a component is started for the first time, "entrypoint.sh"
 
 All the component containers share a volume which maps to the /share directory in the container. This volume can be used for sharing files between containers.
 
+The networks and volumes used by components defined here are external resources that are created/removed separately.
+
 # Component: Kerberos
 
 * To use this component, env "REALM" and "DOMAIN" must be defined.
