@@ -12,8 +12,8 @@ services:
       custom:
     hostname: kdc.${DOMAIN}
     volumes:
-      - ./entrypoint:/tmp/entrypoint
-      - ./config:/tmp/config
+      - ../../entrypoint:/tmp/entrypoint
+      - ../../config:/tmp/config
       - /dev/urandom:/dev/random
       - /etc/localtime:/etc/localtime:ro
     environment:
