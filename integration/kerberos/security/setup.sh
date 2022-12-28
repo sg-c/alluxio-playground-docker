@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -xe
-
 # wait for kdc to start and ready
 while [ ! -f /kerberos_initialized ]; do
     sleep 2
