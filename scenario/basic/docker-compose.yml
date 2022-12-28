@@ -1,0 +1,25 @@
+version: '3.11'
+
+networks:
+  custom:
+    name: alluxio-network
+    external: true
+
+volumes:
+  share:
+    name: alluxio-share
+    external: true
+
+services:
+  presto:
+    extends:
+      file: ../../component/prestodb.yml
+      service: presto
+  alluxio-master:
+    extends:
+      file: ../../component/alluxio.yml
+      service: alluxio-master
+  alluxio-worker:
+    extends:
+      file: ../../component/alluxio.yml
+      service: alluxio-worker

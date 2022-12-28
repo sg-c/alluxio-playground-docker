@@ -1,10 +1,5 @@
 version: '3.11'
 
-networks:
-  custom:
-    name: alluxio-network
-    external: true
-
 services:
   namenode:
     image: apache/hadoop:3
@@ -12,11 +7,15 @@ services:
       custom:
     hostname: namenode.${DOMAIN}
     environment:
+      - DOMAIN=${DOMAIN}
       - NAMENODE_FQDN=namenode.${DOMAIN}
+      - INTEGRATION_TMP_DIR=/integration/tmp
     volumes:
-      - ./entrypoint:/tmp/entrypoint
-      - ./config:/tmp/config
-    entrypoint: /tmp/entrypoint/hadoop/entrypoint.sh
+      - ../config:/config
+      - ../entrypoint:/entrypoint
+      - ../integration:/integration
+      - share:/share
+    entrypoint: /entrypoint/hadoop/entrypoint.sh
     
   datanode:
     extends:

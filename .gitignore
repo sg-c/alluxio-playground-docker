@@ -1,0 +1,2 @@
+# ignore container created tmp directory
+tmp/

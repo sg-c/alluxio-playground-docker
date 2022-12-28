@@ -1,10 +1,5 @@
 version: '3.11'
 
-networks:
-  custom:
-    name: alluxio-network
-    external: true
-
 services:
   kdc:
     image: sequenceiq/kerberos
@@ -12,15 +7,18 @@ services:
       custom:
     hostname: kdc.${DOMAIN}
     volumes:
-      - ./entrypoint:/tmp/entrypoint
-      - ./config:/tmp/config
       - /dev/urandom:/dev/random
       - /etc/localtime:/etc/localtime:ro
+      - ../config:/config
+      - ../entrypoint:/entrypoint
+      - ../integration:/integration
+      - share:/share
     environment:
+      - DOMAIN=${DOMAIN}
       - REALM=${REALM}
       - DOMAIN_REALM=${DOMAIN}
-      - KDC_ADDRESS=${HOSTNAME}
       - KERB_MASTER_KEY=masterkey
       - KERB_ADMIN_USE=admin
       - KERB_ADMIN_PASS=admin
-    entrypoint: /tmp/entrypoint/kerberos/entrypoint.sh
+      - INTEGRATION_TMP_DIR=/integration/tmp
+    entrypoint: /entrypoint/kerberos/entrypoint.sh

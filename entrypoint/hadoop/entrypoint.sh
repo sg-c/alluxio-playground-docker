@@ -1,9 +1,12 @@
 #!/bin/bash
 
+# change the permissions of /share directory
+sudo chmod 777 /share
+
 HADOOP_HOME=/opt/hadoop
 
 # copy local config files to hadoop config dir
-cp /tmp/config/hadoop/* ${HADOOP_CONF_DIR}
+cp /config/hadoop/* ${HADOOP_CONF_DIR}
 
 # update hdfs config
 for file in $(find ${HADOOP_CONF_DIR} -type f); do

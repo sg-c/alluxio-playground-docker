@@ -56,17 +56,17 @@
 
 create_config() {
     # import eval_read function
-    source /tmp/entrypoint/utils.sh
+    source /entrypoint/utils.sh
 
     # set KDC_ADDRESS, which is used in krb5.conf
     KDC_ADDRESS=$(hostname -f)
 
     # evaluate and copy the main krb5.conf file to /etc
-    eval_read /tmp/config/kerberos/krb5.conf > /etc/krb5.conf
+    eval_read /config/kerberos/krb5.conf > /etc/krb5.conf
 
     # create /etc/krb5.conf.d, then eval and copy the per-domain krb5.conf file
     mkdir -p /etc/krb5.conf.d
-    eval_read /tmp/config/kerberos/krb5.conf.d/krb5.conf > /etc/krb5.conf.d/krb5.conf
+    eval_read /config/kerberos/krb5.conf.d/krb5.conf > /etc/krb5.conf.d/krb5.conf
 }
 
 create_db() {
@@ -88,6 +88,15 @@ create_admin_user() {
     echo "*/admin@$REALM *" >/var/kerberos/krb5kdc/kadm5.acl
 }
 
+copy_krb5_conf() {
+    cp /etc/krb5.conf /share/krb5.conf
+    chmod 777 /share/krb5.conf
+
+    mkdir -p /share/krb5.conf.d
+    cp /etc/krb5.conf.d/krb5.conf /share/krb5.conf.d/krb5.${DOMAIN}.conf
+    chmod 777 /share/krb5.conf.d/krb5.${DOMAIN}.conf
+}
+
 main() {
     if [ ! -f /kerberos_initialized ]; then
         create_config
@@ -96,6 +105,8 @@ main() {
         start_kdc
 
         touch /kerberos_initialized
+
+        copy_krb5_conf
     fi
 
     if [ ! -f /var/kerberos/krb5kdc/principal ]; then
