@@ -26,7 +26,7 @@ remove)
     remove
     ;;
 inspect)
-    inspect $1
+    inspect $2
     ;;
 *)
     echo "volume.sh create"
