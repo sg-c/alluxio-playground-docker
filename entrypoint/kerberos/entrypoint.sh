@@ -56,7 +56,7 @@
 
 create_config() {
     # import eval_read function
-    source /tmp/entrypoint/utils.sh
+    source /entrypoint/utils.sh
 
     # set KDC_ADDRESS, which is used in krb5.conf
     KDC_ADDRESS=$(hostname -f)
