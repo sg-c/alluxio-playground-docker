@@ -13,13 +13,13 @@ volumes:
 services:
   kdc:
     extends:
-      file: ../../docker-compose/kerberos.yml
+      file: ../../component/kerberos.yml
       service: kdc
   namenode:
     extends:
-      file: ../../docker-compose/hadoop.yml
+      file: ../../component/hadoop.yml
       service: namenode
   datanode:
     extends:
-      file: ../../docker-compose/hadoop.yml
+      file: ../../component/hadoop.yml
       service: datanode
