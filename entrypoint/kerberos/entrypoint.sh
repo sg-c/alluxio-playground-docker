@@ -88,6 +88,15 @@ create_admin_user() {
     echo "*/admin@$REALM *" >/var/kerberos/krb5kdc/kadm5.acl
 }
 
+copy_krb5_conf() {
+    cp /etc/krb5.conf /share/krb5.conf
+    chmod 777 /share/krb5.conf
+
+    mkdir -p /share/krb5.conf.d
+    cp /etc/krb5.conf.d/krb5.conf /share/krb5.conf.d/krb5.${DOMAIN}.conf
+    chmod 777 /share/krb5.conf.d/krb5.${DOMAIN}.conf
+}
+
 main() {
     if [ ! -f /kerberos_initialized ]; then
         create_config
@@ -96,6 +105,8 @@ main() {
         start_kdc
 
         touch /kerberos_initialized
+
+        copy_krb5_conf
     fi
 
     if [ ! -f /var/kerberos/krb5kdc/principal ]; then

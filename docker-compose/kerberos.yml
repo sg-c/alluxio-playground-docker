@@ -16,10 +16,10 @@ services:
       - ../config:/tmp/config
       - /dev/urandom:/dev/random
       - /etc/localtime:/etc/localtime:ro
+      - share:/share
     environment:
       - REALM=${REALM}
       - DOMAIN_REALM=${DOMAIN}
-      - KDC_ADDRESS=${HOSTNAME}
       - KERB_MASTER_KEY=masterkey
       - KERB_ADMIN_USE=admin
       - KERB_ADMIN_PASS=admin
