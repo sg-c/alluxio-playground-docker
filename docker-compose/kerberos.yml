@@ -5,6 +5,11 @@ networks:
     name: alluxio-network
     external: true
 
+volumes:
+  share:
+    name: alluxio-share
+    external: true
+
 services:
   kdc:
     image: sequenceiq/kerberos
