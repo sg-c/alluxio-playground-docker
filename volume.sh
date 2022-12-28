@@ -26,9 +26,11 @@ remove)
     remove
     ;;
 inspect)
-    inspect VOLUME_NAME
+    inspect $1
     ;;
 *)
-    echo "volume.sh create|remove|inspect"
+    echo "volume.sh create"
+    echo "volume.sh remove"
+    echo "volume.sh inspect VOLUME_NAME"
     ;;
 esac
