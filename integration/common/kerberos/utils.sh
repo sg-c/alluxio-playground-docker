@@ -1,3 +1,5 @@
+#!/bin/bash
+
 copy_krb5_conf() {
     user=$1
     group=$2
