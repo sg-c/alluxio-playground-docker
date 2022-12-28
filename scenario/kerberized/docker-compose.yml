@@ -1,5 +1,10 @@
 version: '3.11'
 
+networks:
+  custom:
+    name: alluxio-network
+    external: true
+
 services:
   kdc:
     extends:
