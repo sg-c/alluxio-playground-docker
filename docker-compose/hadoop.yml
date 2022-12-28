@@ -14,8 +14,8 @@ services:
     environment:
       - NAMENODE_FQDN=namenode.${DOMAIN}
     volumes:
-      - ../../entrypoint:/tmp/entrypoint
-      - ../../config:/tmp/config
+      - ../entrypoint:/tmp/entrypoint
+      - ../config:/tmp/config
     entrypoint: /tmp/entrypoint/hadoop/entrypoint.sh
     
   datanode:
