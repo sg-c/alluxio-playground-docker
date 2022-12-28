@@ -8,7 +8,7 @@ services:
   namenode:
     extends:
       file: ../../docker-compose/hadoop.yml
-      service: namednode
+      service: namenode
   datanode:
     extends:
       file: ../../docker-compose/hadoop.yml
