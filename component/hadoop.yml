@@ -9,10 +9,11 @@ services:
     environment:
       - NAMENODE_FQDN=namenode.${DOMAIN}
     volumes:
-      - ../entrypoint:/tmp/entrypoint
-      - ../config:/tmp/config
+      - ../config:/config
+      - ../entrypoint:/entrypoint
+      - ../integration:/integration
       - share:/share
-    entrypoint: /tmp/entrypoint/hadoop/entrypoint.sh
+    entrypoint: /entrypoint/hadoop/entrypoint.sh
     
   datanode:
     extends:

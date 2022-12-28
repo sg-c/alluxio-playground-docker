@@ -7,10 +7,11 @@ services:
       custom:
     hostname: kdc.${DOMAIN}
     volumes:
-      - ../entrypoint:/tmp/entrypoint
-      - ../config:/tmp/config
       - /dev/urandom:/dev/random
       - /etc/localtime:/etc/localtime:ro
+      - ../config:/config
+      - ../entrypoint:/entrypoint
+      - ../integration:/integration
       - share:/share
     environment:
       - REALM=${REALM}
@@ -18,4 +19,4 @@ services:
       - KERB_MASTER_KEY=masterkey
       - KERB_ADMIN_USE=admin
       - KERB_ADMIN_PASS=admin
-    entrypoint: /tmp/entrypoint/kerberos/entrypoint.sh
+    entrypoint: /entrypoint/kerberos/entrypoint.sh

@@ -6,7 +6,11 @@ YAML files in this directory are referenced and used by docker-compose.yml files
 
 When the container of a component is started for the first time, "entrypoint.sh" in the ../entrypoint directory and configurations in the ../config directory are used to together to do basic setups.
 
-All the component containers share a volume which maps to the /share directory in the container. This volume can be used for sharing files between containers.
+All the component containers have following volumes in common:
+- a volume mounted to the /share directory in the container; this volume is created/removed by the "${REPO_HOME}/volume.sh" script and can be used for sharing files between containers
+- a volume mounted to the /integration directory in the container; this volume is a host path to the "${REPO_HOME}/integration"; this volumes contains integration scripts
+- a volume mounted to the /config directory in the container; this volume is a host path to the "${REPO_HOME}/config"; this volumes contains startup configuration files
+- a volume mounted to the /entrypoint directory in the container; this volume is a host path to the "${REPO_HOME}/entrypoint"; this volumes contains startup scripts
 
 The networks and volumes used by components defined here are external resources that are created/removed separately.
 

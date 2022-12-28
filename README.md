@@ -12,3 +12,4 @@
 
 # TODO
 - [ ] Allow users to use different versions of components.
+- [ ] Add instruction for using this repo on EC2 instance.

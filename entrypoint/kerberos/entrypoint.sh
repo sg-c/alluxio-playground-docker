@@ -62,11 +62,11 @@ create_config() {
     KDC_ADDRESS=$(hostname -f)
 
     # evaluate and copy the main krb5.conf file to /etc
-    eval_read /tmp/config/kerberos/krb5.conf > /etc/krb5.conf
+    eval_read /config/kerberos/krb5.conf > /etc/krb5.conf
 
     # create /etc/krb5.conf.d, then eval and copy the per-domain krb5.conf file
     mkdir -p /etc/krb5.conf.d
-    eval_read /tmp/config/kerberos/krb5.conf.d/krb5.conf > /etc/krb5.conf.d/krb5.conf
+    eval_read /config/kerberos/krb5.conf.d/krb5.conf > /etc/krb5.conf.d/krb5.conf
 }
 
 create_db() {
