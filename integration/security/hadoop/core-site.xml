@@ -1,0 +1,103 @@
+<configuration>
+    <property>
+        <name>fs.defaultFS</name>
+        <value>hdfs://namenode.domain-1.com:9000</value>
+    </property>
+    <property>
+         <name>hadoop.security.authentication</name>
+         <value>kerberos</value>
+         <description> Set the authentication for the cluster.
+         Valid values are: simple or kerberos.</description>
+    </property>
+    <property>
+         <name>hadoop.security.authorization</name>
+         <value>true</value>
+         <description>Enable authorization for different protocols.</description>
+    </property>
+    <property>
+        <name>hadoop.security.auth_to_local</name>
+        <value>
+        RULE:[1:$1@$0](alluxio.*@.*REALM)s/.*/alluxio/ 
+        RULE:[1:$1@$0](ava.*@.*REALM)s/.*/ava/ 
+        RULE:[1:$1@$0](bob.*@.*REALM)s/.*/bob/ 
+        RULE:[1:$1@$0](hive.*@.*REALM)s/.*/hive/ 
+        RULE:[2:$1@$0](presto@.*REALM)s/.*/presto/
+        RULE:[2:$1@$0]([jt]t@.*REALM)s/.*/hadoop/
+        RULE:[2:$1@$0]([nd]n@.*REALM)s/.*/hadoop/
+        RULE:[2:$1@$0](hm@.*REALM)s/.*/hadoop/
+        RULE:[2:$1@$0](rs@.*REALM)s/.*/hadoop/
+        RULE:[2:$1@$0](rm@.*REALM)s/.*/hadoop/
+        RULE:[2:$1@$0](jhs@.*REALM)s/.*/hadoop/
+        DEFAULT
+        </value>
+        <description>The mapping from kerberos principal names
+        to local OS user names.</description>
+    </property>
+    <property>
+        <name>hadoop.rpc.protection</name>
+        <value>authentication</value>
+        <description>Set to "authentication" from "privacy" to solve "No common protection layer between client and server", see
+          https://community.cloudera.com/t5/Support-Questions/No-common-protection-layer-between-client-and-server-while/td-p/41814
+          for details
+        </description>
+    </property>
+
+    <property>
+      <name>hadoop.proxyuser.hive.hosts</name>
+      <value>*</value>
+    </property>
+    <property>
+      <name>hadoop.proxyuser.hive.groups</name>
+      <value>*</value>
+    </property>
+
+    <property>
+      <name>hadoop.proxyuser.alluxio.hosts</name>
+      <value>*</value>
+    </property>
+    <property>
+      <name>hadoop.proxyuser.alluxio.groups</name>
+      <value>*</value>
+    </property>
+
+    <property>
+      <name>fs.s3a.server-side-encryption.key</name>
+      <value></value>
+    </property>
+    <property>
+      <name>fs.s3a.path.style.access</name>
+      <value>true</value>
+    </property>
+    <property>
+      <name>fs.s3a.connection.ssl.enabled</name>
+      <value>false</value>
+    </property>
+    <property>
+      <name>fs.alluxio.impl</name>
+      <value>alluxio.hadoop.FileSystem</value>
+      <description>The Alluxio FileSystem</description>
+    </property>
+
+
+    <property>
+      <name>hadoop.ssl.require.client.cert</name>
+      <value>false</value>
+  </property>
+  <property>
+      <name>hadoop.ssl.hostname.verifier</name>
+      <value>DEFAULT</value>
+  </property>
+  <property>
+      <name>hadoop.ssl.keystores.factory.class</name>
+      <value>org.apache.hadoop.security.ssl.FileBasedKeyStoresFactory</value>
+  </property>
+  <property>
+      <name>hadoop.ssl.server.conf</name>
+      <value>ssl-server.xml</value>
+  </property>
+  <property>
+      <name>hadoop.ssl.client.conf</name>
+      <value>ssl-client.xml</value>
+  </property>
+
+</configuration>
