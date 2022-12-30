@@ -23,25 +23,17 @@ kadmin -p ${KERB_ADMIN_PRIC} -w ${KERB_ADMIN_PASS} -q "addprinc -pw ${KERB_USER_
 # the "apache/hadoop:3" images uses "hadoop:users" to start hadoop services by default
 
 ## Kerberos principals for Hadoop Daemons
-# namenode pricinpals
-kadmin -p ${KERB_ADMIN_PRIC} -w ${KERB_ADMIN_PASS} -q "addprinc -randkey -maxrenewlife 7d +allow_renewable nn/namenode.${DOMAIN}@${REALM}"
-kadmin -p ${KERB_ADMIN_PRIC} -w ${KERB_ADMIN_PASS} -q "addprinc -randkey -maxrenewlife 7d +allow_renewable host/namenode.${DOMAIN}@${REALM}"
-
-kadmin -p ${KERB_ADMIN_PRIC} -w ${KERB_ADMIN_PASS} -q "xst -k nn.service.keytab nn/namenode.${DOMAIN}"
-kadmin -p ${KERB_ADMIN_PRIC} -w ${KERB_ADMIN_PASS} -q "xst -k nn.service.keytab host/namenode.${DOMAIN}"
-
-# datanode principals
-kadmin -p ${KERB_ADMIN_PRIC} -w ${KERB_ADMIN_PASS} -q "addprinc -randkey -maxrenewlife 7d +allow_renewable dn/datanode.${DOMAIN}@${REALM}"
-kadmin -p ${KERB_ADMIN_PRIC} -w ${KERB_ADMIN_PASS} -q "addprinc -randkey -maxrenewlife 7d +allow_renewable host/datanode.${DOMAIN}@${REALM}"
-
-kadmin -p ${KERB_ADMIN_PRIC} -w ${KERB_ADMIN_PASS} -q "xst -k dn.service.keytab dn/datanode.${DOMAIN}"
-kadmin -p ${KERB_ADMIN_PRIC} -w ${KERB_ADMIN_PASS} -q "xst -k dn.service.keytab host/datanode.${DOMAIN}"
+# namenode pricinpals are created by ./setup-namenode.sh
+# datanode principals are created by ./setup-datanode.sh
 
 ## Mapping from Kerberos principals to OS user accounts
+# update the following config
+#   * core-site.xml
+#       * hadoop.security.auth_to_local
 sed -i "s#REALM#${REALM}#g" ./core-site.xml
 
 ## Mapping from user to group
-# the default value get groups from OS
+# the default config uses groups from OS
 #   * core-site.xml
 #       * hadoop.security.group.mapping = org.apache.hadoop.security.JniBasedUnixGroupsMappingWithFallback
 
