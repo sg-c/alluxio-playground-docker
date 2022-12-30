@@ -14,10 +14,7 @@ copy_krb5_conf root root
 ## reference: https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SecureMode.html#Kerberos_principals_for_Hadoop_Daemons
 
 ## End User Accounts
-KERB_ADMIN_PRIC=${KERB_ADMIN_USER}/admin
-# create user principals for ava and bob
-kadmin -p ${KERB_ADMIN_PRIC} -w ${KERB_ADMIN_PASS} -q "addprinc -pw ${KERB_USER_PASS} ava@${REALM}"
-kadmin -p ${KERB_ADMIN_PRIC} -w ${KERB_ADMIN_PASS} -q "addprinc -pw ${KERB_USER_PASS} bob@${REALM}"
+# see ${REPO_HOME}/scenario/security/README.md for creating user principals
 
 ## User Accounts for Hadoop Daemons
 # the "apache/hadoop:3" images uses "hadoop:users" to start hadoop services by default
