@@ -19,6 +19,10 @@ services:
     extends:
       file: ../../component/hadoop.yml
       service: namenode
+    environment:
+      - KERB_ADMIN_USER:${KERB_ADMIN_USER}
+      - KERB_ADMIN_PASS:${KERB_ADMIN_PASS}
+      - KERB_USER_PASS:${KERB_USER_PASS}
   datanode:
     extends:
       file: ../../component/hadoop.yml
