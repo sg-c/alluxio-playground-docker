@@ -69,4 +69,3 @@ sed -i "%s#REALM#${REALM}#g" ./core-site.xml
 #   * hdfs-site.xml
 #       * dfs.encrypt.data.transfer = false (default value)
 
-##
