@@ -28,7 +28,7 @@ diff_cp() {
     dst=$2
 
     # save the difference of new and old file
-    save_diff src dst
+    save_diff $src $dst
     # then replace the old file with the new one
     cp src dst
 }
