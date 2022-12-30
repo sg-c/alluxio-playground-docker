@@ -4,9 +4,9 @@
 source ../../common/utils.sh
 
 copy_configs() {
-    diff_cp ./core-site.xml $HADOOP_CONF_DIR
-    diff_cp ./hdfs-site.xml $HADOOP_CONF_DIR
-    diff_cp ./hadoop-env.sh $HADOOP_CONF_DIR
+    diff_cp $(dirname $0)/core-site.xml $HADOOP_CONF_DIR
+    diff_cp $(dirname $0)/hdfs-site.xml $HADOOP_CONF_DIR
+    diff_cp $(dirname $0)/hadoop-env.sh $HADOOP_CONF_DIR
 
     chown $(id -un):$(id -gn) $HADOOP_CONF_DIR/*
 }
