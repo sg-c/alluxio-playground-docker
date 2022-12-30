@@ -38,7 +38,7 @@ kadmin -p ${KERB_ADMIN_PRIC} -w ${KERB_ADMIN_PASS} -q "xst -k dn.service.keytab 
 kadmin -p ${KERB_ADMIN_PRIC} -w ${KERB_ADMIN_PASS} -q "xst -k dn.service.keytab host/datanode.${DOMAIN}"
 
 ## Mapping from Kerberos principals to OS user accounts
-sed -i "%s#REALM#${REALM}#g" ./core-site.xml
+sed -i "s#REALM#${REALM}#g" ./core-site.xml
 
 ## Mapping from user to group
 # the default value get groups from OS
