@@ -14,27 +14,28 @@ copy_krb5_conf root root
 ## reference: https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SecureMode.html#Kerberos_principals_for_Hadoop_Daemons
 
 ## End User Accounts
+KERB_ADMIN_PRIC=${KERB_ADMIN_USER}/admin
 # create user principals for ava and bob
-kadmin -p ${KERB_ADMIN_USER} -w ${KERB_ADMIN_PASS} -q "addprinc -pw ${KERB_USER_PASS} ava@${REALM}"
-kadmin -p ${KERB_ADMIN_USER} -w ${KERB_ADMIN_PASS} -q "addprinc -pw ${KERB_USER_PASS} bob@${REALM}"
+kadmin -p ${KERB_ADMIN_PRIC} -w ${KERB_ADMIN_PASS} -q "addprinc -pw ${KERB_USER_PASS} ava@${REALM}"
+kadmin -p ${KERB_ADMIN_PRIC} -w ${KERB_ADMIN_PASS} -q "addprinc -pw ${KERB_USER_PASS} bob@${REALM}"
 
 ## User Accounts for Hadoop Daemons
 # the "apache/hadoop:3" images uses "hadoop:users" to start hadoop services by default
 
 ## Kerberos principals for Hadoop Daemons
 # namenode pricinpals
-kadmin -p ${KERB_ADMIN_USER} -w ${KERB_ADMIN_PASS} -q "addprinc -randkey -maxrenewlife 7d +allow_renewable nn/namenode.${DOMAIN}@${REALM}"
-kadmin -p ${KERB_ADMIN_USER} -w ${KERB_ADMIN_PASS} -q "addprinc -randkey -maxrenewlife 7d +allow_renewable host/namenode.${DOMAIN}@${REALM}"
+kadmin -p ${KERB_ADMIN_PRIC} -w ${KERB_ADMIN_PASS} -q "addprinc -randkey -maxrenewlife 7d +allow_renewable nn/namenode.${DOMAIN}@${REALM}"
+kadmin -p ${KERB_ADMIN_PRIC} -w ${KERB_ADMIN_PASS} -q "addprinc -randkey -maxrenewlife 7d +allow_renewable host/namenode.${DOMAIN}@${REALM}"
 
-kadmin -p ${KERB_ADMIN_USER} -w ${KERB_ADMIN_PASS} -q "xst -k nn.service.keytab nn/namenode.${DOMAIN}"
-kadmin -p ${KERB_ADMIN_USER} -w ${KERB_ADMIN_PASS} -q "xst -k nn.service.keytab host/namenode.${DOMAIN}"
+kadmin -p ${KERB_ADMIN_PRIC} -w ${KERB_ADMIN_PASS} -q "xst -k nn.service.keytab nn/namenode.${DOMAIN}"
+kadmin -p ${KERB_ADMIN_PRIC} -w ${KERB_ADMIN_PASS} -q "xst -k nn.service.keytab host/namenode.${DOMAIN}"
 
 # datanode principals
-kadmin -p ${KERB_ADMIN_USER} -w ${KERB_ADMIN_PASS} -q "addprinc -randkey -maxrenewlife 7d +allow_renewable dn/datanode.${DOMAIN}@${REALM}"
-kadmin -p ${KERB_ADMIN_USER} -w ${KERB_ADMIN_PASS} -q "addprinc -randkey -maxrenewlife 7d +allow_renewable host/datanode.${DOMAIN}@${REALM}"
+kadmin -p ${KERB_ADMIN_PRIC} -w ${KERB_ADMIN_PASS} -q "addprinc -randkey -maxrenewlife 7d +allow_renewable dn/datanode.${DOMAIN}@${REALM}"
+kadmin -p ${KERB_ADMIN_PRIC} -w ${KERB_ADMIN_PASS} -q "addprinc -randkey -maxrenewlife 7d +allow_renewable host/datanode.${DOMAIN}@${REALM}"
 
-kadmin -p ${KERB_ADMIN_USER} -w ${KERB_ADMIN_PASS} -q "xst -k dn.service.keytab dn/datanode.${DOMAIN}"
-kadmin -p ${KERB_ADMIN_USER} -w ${KERB_ADMIN_PASS} -q "xst -k dn.service.keytab host/datanode.${DOMAIN}"
+kadmin -p ${KERB_ADMIN_PRIC} -w ${KERB_ADMIN_PASS} -q "xst -k dn.service.keytab dn/datanode.${DOMAIN}"
+kadmin -p ${KERB_ADMIN_PRIC} -w ${KERB_ADMIN_PASS} -q "xst -k dn.service.keytab host/datanode.${DOMAIN}"
 
 ## Mapping from Kerberos principals to OS user accounts
 sed -i "%s#REALM#${REALM}#g" ./core-site.xml

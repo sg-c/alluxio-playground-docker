@@ -20,6 +20,8 @@ services:
       file: ../../component/hadoop.yml
       service: namenode
     environment:
+      - DOMAIN=${DOMAIN}
+      - REALM=${REALM}
       - KERB_ADMIN_USER=${KERB_ADMIN_USER}
       - KERB_ADMIN_PASS=${KERB_ADMIN_PASS}
       - KERB_USER_PASS=${KERB_USER_PASS}
@@ -27,3 +29,9 @@ services:
     extends:
       file: ../../component/hadoop.yml
       service: datanode
+    environment:
+      - DOMAIN=${DOMAIN}
+      - REALM=${REALM}
+      - KERB_ADMIN_USER=${KERB_ADMIN_USER}
+      - KERB_ADMIN_PASS=${KERB_ADMIN_PASS}
+      - KERB_USER_PASS=${KERB_USER_PASS}
