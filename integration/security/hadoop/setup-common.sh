@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -xe
+set -x
 
 # set PWD
 cd "$(dirname $0)"
