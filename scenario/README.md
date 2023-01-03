@@ -4,4 +4,5 @@
 # Scenarios
 |Scenario|Description|Components|
 |--------|-----------|----------|
-|security|Show how to integrate with Kerberos and Ranger|<ul><li>HDFS</li><li>Hive</li><li>Kerberos</li><li>Ranger</li></ul>|
+|security|Show how to integrate with Kerberos and Ranger.|<ul><li>HDFS</li><li>Hive</li><li>Kerberos</li><li>Ranger</li></ul>|
+|basic|Simple cluster with S3 and Presto for basic Alluxio integration.|<ul><li>HDFS</li><li>Hive</li><li>Kerberos</li><li>Ranger</li></ul>|
