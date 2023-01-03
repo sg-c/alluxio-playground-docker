@@ -19,6 +19,11 @@ services:
     extends:
       file: ../../component/hadoop.yml
       service: namenode
+    networks:
+      custom:
+        ipv4_address: 172.22.0.2
+    extra_hosts:
+      - "datanode.${DOMAIN}: 172.22.0.3"
     environment:
       - DOMAIN=${DOMAIN}
       - REALM=${REALM}
@@ -29,6 +34,11 @@ services:
     extends:
       file: ../../component/hadoop.yml
       service: datanode
+    networks:
+      custom:
+        ipv4_address: 172.22.0.3
+    extra_hosts:
+      - "namenode.${DOMAIN}: 172.22.0.2"
     environment:
       - DOMAIN=${DOMAIN}
       - REALM=${REALM}
