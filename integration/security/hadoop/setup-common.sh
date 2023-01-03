@@ -43,13 +43,13 @@ sed -i "s#REALM#${REALM}#g" ${TMP_SSL_CLIENT}; sed -i "s#DOMAIN#${DOMAIN}#g" ${T
 
 
 # Create SSL certs for Hadoop Namenode HTTPS services
-keys_dir=/etc/ssl/certs # This is a common volume shared across hadoop and alluxio containers
-if [ ! -d /etc/ssl/certs ]; then
+keys_dir=/share/keys # This is a common volume shared across hadoop and alluxio containers
+if [ ! -d $keys_dir ]; then
      mkdir -p $keys_dir
 fi
 
-if [ -f /etc/ssl/certs/hadoop-client-truststore.jks ]; then
-     echo "- File /etc/ssl/certs/hadoop-client-truststore.jks exists, skipping create SSL cert files step"
+if [ -f $keys_dir/hadoop-client-truststore.jks ]; then
+     echo "- File $keys_dir/hadoop-client-truststore.jks exists, skipping create SSL cert files step"
 else
      echo "- Creating SSL cert files"
      old_pwd=`pwd`; cd $keys_dir
@@ -109,7 +109,7 @@ else
 
      # Set permissions and ownership on the keys
      #chown -R $YARN_USER:hadoop /etc/ssl/certs
-     chmod 755 /etc/ssl/certs
+    #  chmod 755 /etc/ssl/certs
      chmod 440 namenode.${DOMAIN}-keystore.jks  
      chmod 440 namenode.${DOMAIN}.cert  
      chmod 440 namenode.${DOMAIN}-truststore.jks 
