@@ -27,4 +27,85 @@
         <name>dfs.encrypt.data.transfer</name>
         <value>false</value>
     </property>
+
+
+    <property>
+        <name>dfs.block.access.token.enable</name>
+        <value>true</value>
+        <description> If "true", access tokens are used as capabilities
+            for accessing datanodes. If "false", no access tokens are checked on
+            accessing datanodes. </description>
+    </property>
+    <property>
+        <name>dfs.namenode.kerberos.principal</name>
+        <value>nn/_HOST@REALM</value>
+        <description> Kerberos principal name for the NameNode </description>
+    </property>
+    <property>
+        <name>dfs.namenode.keytab.file</name>
+        <value>/etc/security/keytabs/nn.service.keytab</value>
+        <description>
+            Combined keytab file containing the namenode service and host
+            principals.
+        </description>
+    </property>
+    <property>
+        <name>dfs.web.authentication.kerberos.principal</name>
+        <value>HTTP/_HOST@REALM</value>
+        <description> The HTTP Kerberos principal used by Hadoop-Auth in the HTTP endpoint.
+            The HTTP Kerberos principal MUST start with 'HTTP/' per Kerberos HTTP
+            SPNEGO specification.
+        </description>
+    </property>
+    <property>
+        <name>dfs.web.authentication.kerberos.keytab</name>
+        <value>/etc/security/keytabs/spnego.service.keytab</value>
+        <description>The Kerberos keytab file with the credentials for the HTTP
+            Kerberos principal used by Hadoop-Auth in the HTTP endpoint.
+        </description>
+    </property>
+    <property>
+        <name>dfs.namenode.kerberos.internal.spnego.principal</name>
+        <value>${dfs.web.authentication.kerberos.principal}</value>
+    </property>
+    <property>
+        <name>dfs.web.authentication.kerberos.keytab</name>
+        <value>/etc/security/keytabs/spnego.service.keytab</value>
+        <description>The Kerberos keytab file with the credentials for the HTTP
+            Kerberos principal used by Hadoop-Auth in the HTTP endpoint.
+        </description>
+    </property>
+    <property>
+        <name>dfs.namenode.https-address</name>
+        <value>namenode.DOMAIN:50470</value>
+    </property>
+
+
+    <property>
+        <name>dfs.datanode.data.dir.perm</name>
+        <value>700</value>
+    </property>
+    <property>
+        <name>dfs.datanode.https.address</name>
+        <value>0.0.0.0:50075</value>
+    </property>
+    <property>
+         <name>dfs.datanode.kerberos.principal</name>
+         <value>dn/_HOST@REALM</value>
+         <description>
+         The Kerberos principal that the DataNode runs as. "_HOST" is replaced by the real
+         host name.
+         </description>
+    </property>
+    <property>
+         <name>dfs.datanode.keytab.file</name>
+         <value>/etc/security/keytabs/dn.service.keytab</value>
+         <description>
+         The filename of the keytab file for the DataNode.
+         </description>
+    </property>
+    <property>
+        <name>dfs.encrypt.data.transfer</name>
+        <value>false</value>
+    </property>
 </configuration>

@@ -28,6 +28,7 @@ copy_krb5_conf root root
 #   * core-site.xml
 #       * hadoop.security.auth_to_local
 sed -i "s#REALM#${REALM}#g" ./core-site.xml
+sed -i "s#DOMAIN#${DOMAIN}#g" ./core-site.xml
 
 ## Mapping from user to group
 # the default config uses groups from OS
@@ -58,4 +59,9 @@ sed -i "s#REALM#${REALM}#g" ./core-site.xml
 # no encryption for block transfering
 #   * hdfs-site.xml
 #       * dfs.encrypt.data.transfer = false (default value)
+
+## Configuration
+# See core-site.xml and hdfs-site.xml for setting of configs
+sed -i "s#REALM#${REALM}#g" ./hdfs-site.xml
+sed -i "s#DOMAIN#${DOMAIN}#g" ./hdfs-site.xml
 
