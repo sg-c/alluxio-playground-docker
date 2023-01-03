@@ -27,9 +27,6 @@ else
   kadmin -p ${KERB_ADMIN_PRIC} -w ${KERB_ADMIN_PASS} -q "xst -k dn.service.keytab host/$(hostname -f)"
   kadmin -p ${KERB_ADMIN_PRIC} -w ${KERB_ADMIN_PASS} -q "xst -k spnego.service.keytab HTTP/$(hostname -f)"
 
-#   chmod 400 ${KEYTAB_DIR}/dn.service.keytab
-#   chmod 400 ${KEYTAB_DIR}/spnego.service.keytab
-
   cd $old_dir
 fi
 
