@@ -20,7 +20,7 @@
 
 <property>
   <name>ssl.server.truststore.location</name>
-  <value>/etc/ssl/certs/hadoop-namenode.DOMAIN-truststore.jks</value>
+  <value>/share/keys/hadoop-namenode.DOMAIN-truststore.jks</value>
   <description>Truststore to be used by NN and DN. Must be specified.
   </description>
 </property>
@@ -49,7 +49,7 @@
 
 <property>
   <name>ssl.server.keystore.location</name>
-  <value>/etc/ssl/certs/hadoop-namenode.DOMAIN-keystore.jks</value>
+  <value>/share/keys/hadoop-namenode.DOMAIN-keystore.jks</value>
   <description>Keystore to be used by NN and DN. Must be specified.
   </description>
 </property>
