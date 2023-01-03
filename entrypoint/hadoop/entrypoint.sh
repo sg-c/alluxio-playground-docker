@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# change the permissions of /share directory
+sudo chmod 777 /share
+
 HADOOP_HOME=/opt/hadoop
 
 # copy local config files to hadoop config dir
