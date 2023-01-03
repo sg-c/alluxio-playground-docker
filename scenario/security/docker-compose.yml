@@ -9,6 +9,8 @@ volumes:
   share:
     name: alluxio-share
     external: true
+  keystore:
+    driver: local
 
 services:
   kdc:
@@ -25,6 +27,8 @@ services:
       - KERB_ADMIN_USER=${KERB_ADMIN_USER}
       - KERB_ADMIN_PASS=${KERB_ADMIN_PASS}
       - KERB_USER_PASS=${KERB_USER_PASS}
+    volumes:
+      - keystore:/etc/ssl/certs
   datanode:
     extends:
       file: ../../component/hadoop.yml
@@ -35,3 +39,5 @@ services:
       - KERB_ADMIN_USER=${KERB_ADMIN_USER}
       - KERB_ADMIN_PASS=${KERB_ADMIN_PASS}
       - KERB_USER_PASS=${KERB_USER_PASS}
+    volumes:
+      - keystore:/etc/ssl/certs

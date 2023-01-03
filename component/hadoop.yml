@@ -8,6 +8,7 @@ services:
     hostname: namenode.${DOMAIN}
     environment:
       - NAMENODE_FQDN=namenode.${DOMAIN}
+      - INTEGRATION_TMP_DIR=/integration/tmp
     volumes:
       - ../config:/config
       - ../entrypoint:/entrypoint

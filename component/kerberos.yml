@@ -19,4 +19,5 @@ services:
       - KERB_MASTER_KEY=masterkey
       - KERB_ADMIN_USE=admin
       - KERB_ADMIN_PASS=admin
+      - INTEGRATION_TMP_DIR=/integration/tmp
     entrypoint: /entrypoint/kerberos/entrypoint.sh
