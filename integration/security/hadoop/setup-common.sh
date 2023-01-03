@@ -29,9 +29,9 @@ copy_krb5_conf root root
 #       * hadoop.security.auth_to_local
 mkdir -p ./tmp
 TMP_CORE_SITE=./tmp/core-site.xml
-touch ${TMP_CORE_SITE} && cat /dev/null > ${TMP_CORE_SITE}
-sed "s#REALM#${REALM}#g" ./core-site.xml >> ${TMP_CORE_SITE}
-sed "s#DOMAIN#${DOMAIN}#g" ./core-site.xml >> ${TMP_CORE_SITE}
+cp ./core-site.xml ${TMP_CORE_SITE}
+sed -i "s#REALM#${REALM}#g" ${TMP_CORE_SITE}
+sed -i "s#DOMAIN#${DOMAIN}#g" ${TMP_CORE_SITE}
 
 ## Mapping from user to group
 # the default config uses groups from OS
@@ -67,7 +67,7 @@ sed "s#DOMAIN#${DOMAIN}#g" ./core-site.xml >> ${TMP_CORE_SITE}
 # See core-site.xml and hdfs-site.xml for setting of configs
 mkdir -p ./tmp
 TMP_HDFS_SITE=./tmp/hdfs-site.xml
-touch ${TMP_HDFS_SITE} && cat /dev/null > ${TMP_HDFS_SITE}
+cp ./hdfs-site.xml ${TMP_HDFS_SITE}
 sed -i "s#REALM#${REALM}#g" ${TMP_HDFS_SITE}
 sed -i "s#DOMAIN#${DOMAIN}#g" ${TMP_HDFS_SITE}
 
