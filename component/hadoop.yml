@@ -6,7 +6,6 @@ services:
     networks:
       custom:
     hostname: namenode.${DOMAIN}
-    container_name: namenode.${DOMAIN}
     environment:
       - NAMENODE_FQDN=namenode.${DOMAIN}
       - INTEGRATION_TMP_DIR=/integration/tmp
@@ -21,5 +20,4 @@ services:
     extends:
       service: namenode
     hostname: datanode.${DOMAIN}
-    container_name: datanode.${DOMAIN}
 
