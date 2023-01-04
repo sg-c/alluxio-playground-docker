@@ -3,7 +3,7 @@
 set -xe
 
 # change the permissions of /share directory
-chmod 777 /share
+# chmod 777 /share
 
 # import eval_read function
 source /entrypoint/utils.sh
