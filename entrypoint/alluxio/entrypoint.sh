@@ -15,8 +15,8 @@ eval_read /config/alluxio/alluxio-site.properties >/opt/alluxio/conf/alluxio-sit
 alluxio format
 
 if [[ $(hostname -f) == "alluxio-master.${DOMAIN}" ]]; then
-    alluxio-start.sh master
-    alluxio-start.sh job_master
+    # alluxio-start.sh master
+    # alluxio-start.sh job_master
 elif [[ $(hostname -f) == "alluxio-worker.${DOMAIN}" ]]; then
     alluxio-start.sh worker
     alluxio-start.sh job_worker
