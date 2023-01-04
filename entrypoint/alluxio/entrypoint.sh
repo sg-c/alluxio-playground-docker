@@ -18,7 +18,7 @@ if [[ $(hostname -f) == "alluxio-master.${DOMAIN}" ]]; then
     alluxio-start.sh master
     alluxio-start.sh job_master
 elif [[ $(hostname -f) == "alluxio-worker.${DOMAIN}" ]]; then
-    alluxio-start.sh worker
+    alluxio-start.sh worker SudoMount
     alluxio-start.sh job_worker
 else
     # if the hostname doesn't match "alluxio-master.${DOMAIN}" or "alluxio-worker.${DOMAIN}",
