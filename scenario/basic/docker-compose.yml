@@ -15,3 +15,11 @@ services:
     extends:
       file: ../../component/prestodb.yml
       service: presto
+  alluxio-master:
+    extends:
+      file: ../../component/alluxio.yml
+      service: alluxio-master
+  alluxio-worker:
+    extends:
+      file: ../../component/alluxio.yml
+      service: alluxio-worker

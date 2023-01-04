@@ -1,0 +1,21 @@
+version: '3.11'
+
+services:
+  alluxio-master:
+    image: alluxio/alluxio:2.8.1
+    networks:
+      custom:
+    hostname: alluxio-master.${DOMAIN}
+    environment:
+      - INTEGRATION_TMP_DIR=/integration/tmp
+    volumes:
+      - ../config:/config
+      - ../entrypoint:/entrypoint
+      - ../integration:/integration
+      - share:/share
+    entrypoint: /entrypoint/alluxio/entrypoint.sh
+  alluxio-worker:
+    extends:
+      service: alluxio-master
+    hostname: alluxio-worker.${DOMAIN}
+    
