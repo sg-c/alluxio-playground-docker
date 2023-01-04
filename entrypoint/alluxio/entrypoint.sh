@@ -17,6 +17,7 @@ alluxio format
 if [[ $(hostname -f) == "alluxio-master.${DOMAIN}" ]]; then
     # alluxio-start.sh master
     # alluxio-start.sh job_master
+    echo "hi"
 elif [[ $(hostname -f) == "alluxio-worker.${DOMAIN}" ]]; then
     alluxio-start.sh worker
     alluxio-start.sh job_worker
