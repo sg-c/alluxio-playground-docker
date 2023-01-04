@@ -14,6 +14,7 @@ services:
       - ../integration:/integration
       - share:/share
     environment:
+      - DOMAIN=${DOMAIN}
       - REALM=${REALM}
       - DOMAIN_REALM=${DOMAIN}
       - KERB_MASTER_KEY=masterkey

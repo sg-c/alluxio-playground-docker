@@ -11,5 +11,4 @@ services:
       - ../entrypoint:/entrypoint
       - share:/share
     environment:
-      - REALM=${REALM}
-      - DOMAIN_REALM=${DOMAIN}
+      - DOMAIN=${DOMAIN}

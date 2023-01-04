@@ -7,6 +7,7 @@ services:
       custom:
     hostname: alluxio-master.${DOMAIN}
     environment:
+      - DOMAIN=${DOMAIN}
       - INTEGRATION_TMP_DIR=/integration/tmp
     volumes:
       - ../config:/config
