@@ -18,7 +18,6 @@ if [[ $(hostname -f) == "alluxio-master.${DOMAIN}" ]]; then
     alluxio-start.sh master
     alluxio-start.sh job_master
 elif [[ $(hostname -f) == "alluxio-worker.${DOMAIN}" ]]; then
-    export ALLUXIO_RAM_FOLDER=/dev/shm
     alluxio-start.sh worker NoMount
     alluxio-start.sh job_worker
 else
