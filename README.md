@@ -65,6 +65,48 @@ Logout and back in to get new group membershiop
 
      ssh ...
 
+# Quick start security container
+
+Configuration network
+
+    alluxio-playground-docker/network.sh create
+
+Configuration volume
+
+    alluxio-playground-docker/volume.sh create
+
+Start containers 
+    
+    cd alluxio-playground-docker/scenario/security
+    docker-compose up -d
+
+Access namenode container
+    
+    docker exec -it security-namenode-1 bash
+
+Init setup-common.sh and setup-namenode.sh 
+    
+    /integration/security/hadoop/setup-common.sh
+    /integration/security/hadoop/setup-namenode.sh
+
+Quit namenode container and Access datanode container
+
+    docker exec -it security-datanode-1 bash
+    
+Init setup-common.sh setup-datanode.sh 
+
+    /integration/security/hadoop/setup-common.sh
+    /integration/security/hadoop/setup-datanode.sh
+
+Run the following command to create 2 user principals for "ava" and "bob".
+
+    docker exec security-kdc-1 kadmin -p admin/admin -w admin -q "addprinc -pw changeme ava@BEIJING.COM"
+    docker exec security-kdc-1 kadmin -p admin/admin -w admin -q "addprinc -pw changeme bob@BEIJING.COM"
+    
+    kinit ava
+    password：changeme
+    
+
 # TODO
 - [ ] Allow users to use different versions of components.
 - [X] Add instruction for using this repo on EC2 instance.
