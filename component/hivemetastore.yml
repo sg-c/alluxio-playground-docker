@@ -1,21 +1,17 @@
 version: '3.11'
 
 services:
-  namenode:
-    image: apache/hadoop:3
+  hms:
+    image: alluxio-playground-docker/hive:3.1.3
     networks:
       custom:
-    hostname: namenode.alluxio.io
+    hostname: hms.alluxio.io
     environment:
       - INTEGRATION_TMP_DIR=/integration/tmp
     volumes:
       - ../config:/config
       - ../entrypoint:/entrypoint
       - ../integration:/integration
-    entrypoint: /entrypoint/hadoop/entrypoint.sh
-    
-  datanode:
-    extends:
-      service: namenode
-    hostname: datanode.alluxio.io
-
+    entrypoint: /entrypoint/hivemetastore/entrypoint.sh
+    expose:
+      - 9083

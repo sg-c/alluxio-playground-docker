@@ -1,2 +1,5 @@
 # ignore container created tmp directory
 tmp/
+
+# ignore alluxio license file
+license.json

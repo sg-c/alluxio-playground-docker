@@ -1,0 +1,4 @@
+alluxio.security.authentication.type=KERBEROS
+alluxio.security.authorization.permission.enabled=true
+alluxio.security.kerberos.client.principal=presto/presto.${DOMAIN}@${REALM}
+alluxio.security.kerberos.client.keytab.file=/opt/presto-server/keytabs/presto.service.keytab

@@ -12,7 +12,6 @@ services:
       - ../config:/config
       - ../entrypoint:/entrypoint
       - ../integration:/integration
-      - share:/share
     environment:
       - DOMAIN=${DOMAIN}
       - REALM=${REALM}

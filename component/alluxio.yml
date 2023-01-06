@@ -5,18 +5,16 @@ services:
     image: alluxio/alluxio:2.8.1
     networks:
       custom:
-    hostname: alluxio-master.${DOMAIN}
+    hostname: alluxio-master.alluxio.io
     environment:
-      - DOMAIN=${DOMAIN}
       - INTEGRATION_TMP_DIR=/integration/tmp
     volumes:
       - ../config:/config
       - ../entrypoint:/entrypoint
       - ../integration:/integration
-      - share:/share
     entrypoint: /entrypoint/alluxio/entrypoint.sh
   alluxio-worker:
     extends:
       service: alluxio-master
-    hostname: alluxio-worker.${DOMAIN}
+    hostname: alluxio-worker.alluxio.io
     

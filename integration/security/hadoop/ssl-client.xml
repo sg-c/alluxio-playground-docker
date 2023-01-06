@@ -20,7 +20,7 @@
 
 <property>
   <name>ssl.client.truststore.location</name>
-  <value>/share/keys/hadoop-client-truststore.jks</value>
+  <value>${SHARE_DIR}/keys/hadoop-client-truststore.jks</value>
   <description>Truststore to be used by clients like distcp. Must be
   specified.
   </description>

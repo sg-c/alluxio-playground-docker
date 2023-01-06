@@ -34,3 +34,5 @@ inspect)
     echo "volume.sh inspect VOLUME_NAME"
     ;;
 esac
+
+echo "NOTE: volume \"share\" is NOT actually really needed. The containers are NOT using it any more. Consider delete this script."

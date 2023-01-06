@@ -1,36 +1,35 @@
 #!/bin/bash
 
-# change the permissions of /share directory
-sudo chmod 777 /share
+set -xe
 
 HADOOP_HOME=/opt/hadoop
 
 # copy local config files to hadoop config dir
-cp /config/hadoop/* ${HADOOP_CONF_DIR}
+cp /config/hadoop/core-site.xml ${HADOOP_CONF_DIR}/core-site.xml
+cp /config/hadoop/hdfs-site.xml ${HADOOP_CONF_DIR}/hdfs-site.xml
 
-# update hdfs config
-for file in $(find ${HADOOP_CONF_DIR} -type f); do
-    sed -i "s#NAMENODE_FQDN#${NAMENODE_FQDN}#g" ${file}
-done
-
+# start hdfs processes
 if [[ "$(hostname -f)" == "namenode"* ]]; then
-    # format HDFS
-    hdfs namenode -format
+  # format HDFS
+  hdfs namenode -format
 
-    # start namenode daemon
-    HADOOP_LOG=${HADOOP_LOG_DIR}/hadoop-namenode.log
-    nohup hdfs --daemon start namenode >${HADOOP_LOG} 2>&1 &
+  # start namenode daemon
+  HADOOP_LOG=${HADOOP_LOG_DIR}/hadoop-namenode.log
+  hdfs --daemon start namenode >${HADOOP_LOG} 2>&1
+
+  # create /tmp and set mode to 777 in HDFS for Hive and other components to use
+  hdfs dfs -mkdir /tmp
+  hdfs dfs -mkdir /user
+  hdfs dfs -chmod 777 /tmp
+  hdfs dfs -chmod 777 /user
 else
-    # start datanode daemon
-    HADOOP_LOG=${HADOOP_LOG_DIR}/hadoop-datanode.log
-    nohup hdfs --daemon start datanode >${HADOOP_LOG} 2>&1 &
+  # wait for namenode to be ready
+  sleep 6
+
+  # start datanode daemon
+  HADOOP_LOG=${HADOOP_LOG_DIR}/hadoop-datanode.log
+  hdfs --daemon start datanode >${HADOOP_LOG} 2>&1
 fi
 
 # wait forever
-if [[ $1 == "-bash" ]]; then
-  /bin/bash
-else
-  tail -f ${HADOOP_LOG}
-fi
-
-# while true; do sleep 100; done
+while true; do sleep 100; done

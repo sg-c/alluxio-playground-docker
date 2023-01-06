@@ -2,11 +2,8 @@
 
 set -x
 
-source ./utils.sh
-
-# copy new config files to $HADOOP_CONF_DIR
-copy_configs
-
+# execute common setup scripts
+source ./setup-common.sh
 
 # Create kerberos principals and keytabs (if not already created) for namenode
 KERB_ADMIN_PRIC=${KERB_ADMIN_USER}/admin
@@ -37,3 +34,7 @@ fi
 # HADOOP_LOG=${HADOOP_LOG_DIR}/hadoop-namenode.log
 nohup hdfs --daemon stop namenode
 nohup hdfs --daemon start namenode
+
+# create /tmp dir and open it for all users
+hdfs dfs -mkdir /tmp
+hdfs dfs -chmod 777 /tmp

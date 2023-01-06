@@ -2,11 +2,8 @@
 
 set -x
 
-source ./utils.sh
-
-# copy new config files to $HADOOP_CONF_DIR
-copy_configs
-
+# execute common setup scripts
+source ./setup-common.sh
 
 # Create kerberos principals and keytabs (if not already created) for datanode
 KERB_ADMIN_PRIC=${KERB_ADMIN_USER}/admin

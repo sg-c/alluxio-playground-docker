@@ -10,6 +10,26 @@
 * Performance testing.
 * Stress testing.
 
+
+# Project structure (directory layout) explanation
+
+When we deploy a cluster on a set of physical machines or EC2 instances from scratch, we need to deal with a few things:
+- profile the machines and get them ready (choose the CPU, Memroy, Disks, and connect them to the network)
+- install OS and necessary softwares that required by the framework (install centos, libfuse.so, ssh agent..., download alluxio tarball, created and set up directories and etc.)
+- start the framework and make sure it works with the most basic configurations (alluxio-start.sh all with default alluxio-site.properites)
+- change the configuration files and restart the framework for more advanced setup and integrations (HA, Kerberos integration and etc.)
+- execute commands or run jobs to verify the final configuration works
+
+With Docker virtualization, each above step is codified and reflected by files in the different directories.
+- `/component`: YAML files in this directory specify the container setup (network, volumes) for each component, and they are roughtly equivalent to machine profiling
+- `/dockerfile`: Dockerfiles in this directory specify the Docker images (i.e. what OS to use and software to install), and they can be treated as software installation
+- `/config`: files in this directory contain the "barebone" configurations for each framework
+- `/entrypoint`: together with files in `/config`, entrypoint.sh scripts in this directory start frameworks in the most basic mode
+- `/integration`: files in this directory are configuration files and scripts; they together simulate advanced setup and integration steps
+- `/scenarios`: files in this directory are organized by "use cases"; docker-compose.yml files in this directory put all together the frameworks used in a particular scenario to simulate sophiscated setup; 
+`integrate.sh` files in this directory execute scripts from the `/integration` directory within containers to do integrations and bring frameworks to run in a more advanced mode
+
+
 # How to use this repo
 1. Create an EC2 instance on AWS
     * Instance type: c5.4xlarge
@@ -21,7 +41,14 @@
     * `git clone https://github.com/sg-c/alluxio-playground-docker.git`
 4. Go to a sub-directory of ./scenario, and follow the README.md to start the docker compose application.
 
-# Install docker enginer on EC2
+
+# Install docker daemon on EC2
+
+> 🚧 Note
+>
+> If you see `Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?`
+> when you execute `docker compose up -d`, it's because the docker daemon is not running. You need to follow
+> the steps below to install and start docker daemon.
 
 Disable SELinux, update /etc/selinux/config file and run following command
 
@@ -63,50 +90,13 @@ Logout and back in to get new group membershiop
 
      exit
 
-     ssh ...
+     ssh ...    
 
-# Quick start security container
-
-Configuration network
-
-    alluxio-playground-docker/network.sh create
-
-Configuration volume
-
-    alluxio-playground-docker/volume.sh create
-
-Start containers 
-    
-    cd alluxio-playground-docker/scenario/security
-    docker-compose up -d
-
-Access namenode container
-    
-    docker exec -it security-namenode-1 bash
-
-Init setup-common.sh and setup-namenode.sh 
-    
-    /integration/security/hadoop/setup-common.sh
-    /integration/security/hadoop/setup-namenode.sh
-
-Quit namenode container and Access datanode container
-
-    docker exec -it security-datanode-1 bash
-    
-Init setup-common.sh setup-datanode.sh 
-
-    /integration/security/hadoop/setup-common.sh
-    /integration/security/hadoop/setup-datanode.sh
-
-Run the following command to create 2 user principals for "ava" and "bob".
-
-    docker exec security-kdc-1 kadmin -p admin/admin -w admin -q "addprinc -pw changeme ava@BEIJING.COM"
-    docker exec security-kdc-1 kadmin -p admin/admin -w admin -q "addprinc -pw changeme bob@BEIJING.COM"
-    
-    kinit ava
-    password：changeme
-    
 
 # TODO
 - [ ] Allow users to use different versions of components.
 - [X] Add instruction for using this repo on EC2 instance.
+- [X] Provide script for starting/restarting each individual component.
+- [ ] Add a section for frequently used `docker` and `docker compose` commands.
+- [ ] Refactoring (scenario/security): move the Dockerfile for alluxio to /dockerfile/alluxio dir.
+- [ ] Refactoring (scenario/security): move all scripts for creating principals and associated keytab files to the kdc container to run; put all the keytab files in the the $SHARE_DIR/keytabs/ dir.

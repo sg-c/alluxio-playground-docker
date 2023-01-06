@@ -22,9 +22,15 @@ services:
     networks:
       custom:
         ipv4_address: 172.22.0.2
-    extra_hosts:
+        aliases:
+          - namenode.alluxio.io
+    hostname: namenode.${DOMAIN}
+    extra_hosts: &extra_hosts
+      - "namenode.${DOMAIN}: 172.22.0.2"
       - "datanode.${DOMAIN}: 172.22.0.3"
-    environment:
+      - "alluxio-master.${DOMAIN}: 172.22.0.4"
+      - "alluxio-worker.${DOMAIN}: 172.22.0.5"
+    environment: &environment
       - DOMAIN=${DOMAIN}
       - REALM=${REALM}
       - KERB_ADMIN_USER=${KERB_ADMIN_USER}
@@ -37,11 +43,71 @@ services:
     networks:
       custom:
         ipv4_address: 172.22.0.3
-    extra_hosts:
-      - "namenode.${DOMAIN}: 172.22.0.2"
-    environment:
-      - DOMAIN=${DOMAIN}
-      - REALM=${REALM}
-      - KERB_ADMIN_USER=${KERB_ADMIN_USER}
-      - KERB_ADMIN_PASS=${KERB_ADMIN_PASS}
-      - KERB_USER_PASS=${KERB_USER_PASS}
+        aliases:
+          - datanode.alluxio.io
+    hostname: datanode.${DOMAIN}
+    extra_hosts: *extra_hosts
+    environment: *environment
+  alluxio-master:
+    extends:
+      file: ../../component/alluxio.yml
+      service: alluxio-master
+    image: alluxio-playground-docker/security-alluxio-enterprise:2.9.0-1.0
+    networks:
+      custom:
+        ipv4_address: 172.22.0.4
+        aliases:
+          - alluxio-master.alluxio.io
+    hostname: alluxio-master.${DOMAIN}
+    extra_hosts: *extra_hosts
+    environment: *environment
+  alluxio-worker:
+    extends:
+      file: ../../component/alluxio.yml
+      service: alluxio-worker
+    image: alluxio-playground-docker/security-alluxio-enterprise:2.9.0-1.0
+    networks:
+      custom:
+        ipv4_address: 172.22.0.5
+        aliases:
+          - alluxio-worker.alluxio.io
+    hostname: alluxio-worker.${DOMAIN}
+    extra_hosts: *extra_hosts
+    environment: *environment
+  mysql:
+    extends:
+      file: ../../component/mysql.yml
+      service: mysql
+    networks:
+      custom:
+        ipv4_address: 172.22.0.6
+        aliases:
+          - mysql.alluxio.io
+    hostname: mysql.${DOMAIN}
+    environment: *environment
+  hms:
+    extends:
+      file: ../../component/hivemetastore.yml
+      service: hms
+    depends_on: 
+      - mysql
+    networks:
+      custom:
+        ipv4_address: 172.22.0.7
+        aliases:
+          - hms.alluxio.io
+    hostname: hms.${DOMAIN}
+    environment: *environment
+    extra_hosts: *extra_hosts
+  presto:
+    extends:
+      file: ../../component/prestodb.yml
+      service: presto
+    networks:
+      custom:
+        ipv4_address: 172.22.0.8
+        aliases:
+          - presto.alluxio.io
+    hostname: presto.${DOMAIN}
+    environment: *environment
+    extra_hosts: *extra_hosts

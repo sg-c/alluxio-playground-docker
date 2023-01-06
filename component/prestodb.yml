@@ -5,10 +5,11 @@ services:
     image: ahanaio/prestodb-sandbox:0.278
     networks:
       custom:
-    hostname: presto.${DOMAIN}
+    hostname: presto.alluxio.io
+    environment:
+      - INTEGRATION_TMP_DIR=/integration/tmp
     volumes:
       - ../config:/config
       - ../entrypoint:/entrypoint
-      - share:/share
-    environment:
-      - DOMAIN=${DOMAIN}
+      - ../integration:/integration
+    entrypoint: /entrypoint/presto/entrypoint.sh

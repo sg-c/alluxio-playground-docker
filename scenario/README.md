@@ -1,8 +1,18 @@
 # Preparation
-* exeucute `alluxio_playground_docker/network.sh create` and `alluxio_playground_docker/volume.sh create` to create networks and volumes needed by all containers.
+Configuration docker network
+
+    alluxio-playground-docker/network.sh create
+
+Configuration docker volume
+
+    alluxio-playground-docker/volume.sh create
+
+Copy the Alluxio license file to /config/alluxio/license.json
+
+    cp ~/Downloads/alluxio-enterprise-license.json /config/alluxio/license.json
 
 # Scenarios
 |Scenario|Description|Components|
 |--------|-----------|----------|
-|security|Show how to integrate with Kerberos and Ranger.|<ul><li>HDFS</li><li>Hive</li><li>Kerberos</li><li>Ranger</li></ul>|
+|security|Show how to integrate with Kerberos and Ranger.|<ul><li>HDFS</li><li>Presto</li><li>Hive Metastore</li><li>Kerberos</li><li>Ranger</li></ul>|
 |basic|Simple cluster with S3 and Presto for basic Alluxio integration.|<ul><li>Presto</li></ul>|
