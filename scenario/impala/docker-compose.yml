@@ -1,0 +1,37 @@
+version: '3.11'
+
+networks:
+  custom:
+    name: alluxio-network
+    external: true
+
+volumes:
+  share:
+    name: alluxio-share
+    external: true
+
+services:
+  mysql:
+    extends:
+      file: ../../component/mysql.yml
+      service: mysql
+  hms:
+    extends:
+      file: ../../component/hivemetastore.yml
+      service: hms
+    depends_on: 
+      - mysql
+  statestored:
+    extends:
+      file: ../../component/impala.yml
+      service: statestored
+    depends_on:
+      - hms
+  catalogd:
+    extends:
+      file: ../../component/alluxio.yml
+      service: catalogd
+  impalad:
+    extends:
+      file: ../../component/alluxio.yml
+      service: impalad
