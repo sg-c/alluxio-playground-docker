@@ -92,6 +92,11 @@ Logout and back in to get new group membershiop
 
      ssh ...    
 
+# How-to
+## What if I cannot see the web UI of a running service?
+Make sure following operations are done.
+* The port of the web UI process is exposed by the container to the host machine. This can be configured in the docker YAML files in the /component directory or the docker-compose.yml files in the /scenario directory. (Tips: you can use `docker inspect <container-name>` check the ports exposed on host machine.)
+* Update the AWS `Security Group`->`Inbound Rules`. Make sure the port of the web UI process is added in the `Inbound Rules`. (Tips: Don't make the Inbound Rules too open, otherwise, you EC2 instance is at risk of being port scanned and exploited by hackers.)
 
 # TODO
 - [ ] Allow users to use different versions of components.
