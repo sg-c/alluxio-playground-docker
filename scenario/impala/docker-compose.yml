@@ -43,3 +43,7 @@ services:
     extends:
       file: ../../component/impala.yml
       service: impalad
+  impala-shell:
+    extends:
+      file: ../../component/impala.yml
+      service: impala-shell

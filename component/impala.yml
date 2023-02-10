@@ -42,3 +42,10 @@ services:
     depends_on:
       - statestored
       - catalogd
+  impala-shell:
+    image: apache/impala:4.0.0-impala_quickstart_client
+    networks: *networks
+    hostname: impala-shell.alluxio.io
+    environment: *environment
+    volumes: *volumes
+    entrypoint: /entrypoint/impala/entrypoint.sh

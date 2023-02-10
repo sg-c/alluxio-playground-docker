@@ -42,6 +42,9 @@ case $(hostname -f) in
         -use_resolved_hostname=true
     echo hi
     ;;
+*)
+    # do nothing for other containers such as impala-shell
+    ;;
 esac
 
 # wait forever
