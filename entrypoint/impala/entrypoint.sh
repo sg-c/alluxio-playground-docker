@@ -16,14 +16,14 @@ case $(hostname -f) in
         -mem_limit_includes_jvm=true \
         -use_local_catalog=true \
         -rpc_use_loopback=true \
-        -redirect_stdou_stderr=false \
+        -redirect_stdout_stderr=false \
         -use_resolved_hostname=true
     ;;
 *statestored*)
     /opt/impala/bin/daemon_entrypoint.sh \
         /opt/impala/bin/statestored \
         -log_dir=/opt/impala/logs \
-        -redirect_stdou_stderr=false \
+        -redirect_stdout_stderr=false \
         -use_resolved_hostname=true
     ;;
 *catalogd*)
@@ -35,7 +35,7 @@ case $(hostname -f) in
         -catalog_topic_mode=minimal \
         -hms_event_polling_interval_s=1 \
         -invalidate_tables_on_memory_pressure=true \
-        -redirect_stdou_stderr=false \
+        -redirect_stdout_stderr=false \
         -use_resolved_hostname=true
     ;;
 esac
