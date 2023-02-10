@@ -27,16 +27,19 @@ case $(hostname -f) in
         -use_resolved_hostname=true
     ;;
 *catalogd*)
-    # /opt/impala/bin/daemon_entrypoint.sh \
-    #     /opt/impala/bin/catalogd \
-    #     -log_dir=/opt/impala/logs \
-    #     -abort_on_config_error=false \
-    #     -state_store_host=statestored \
-    #     -catalog_topic_mode=minimal \
-    #     -hms_event_polling_interval_s=1 \
-    #     -invalidate_tables_on_memory_pressure=true \
-    #     -redirect_stdout_stderr=false \
-    #     -use_resolved_hostname=true
+    # for catalogd working with Hive 3.1.3, the event notification support on
+    # hive 3.1.3 has not finished by the time of composing this file, so we set
+    # -hms_event_polling_interval_s=0 for catalogd to workaround the a fatal error
+    /opt/impala/bin/daemon_entrypoint.sh \
+        /opt/impala/bin/catalogd \
+        -log_dir=/opt/impala/logs \
+        -abort_on_config_error=false \
+        -state_store_host=statestored \
+        -catalog_topic_mode=minimal \
+        -hms_event_polling_interval_s=0 \
+        -invalidate_tables_on_memory_pressure=true \
+        -redirect_stdout_stderr=false \
+        -use_resolved_hostname=true
     echo hi
     ;;
 esac
