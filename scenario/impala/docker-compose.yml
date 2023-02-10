@@ -29,9 +29,9 @@ services:
       - hms
   catalogd:
     extends:
-      file: ../../component/alluxio.yml
+      file: ../../component/impala.yml
       service: catalogd
   impalad:
     extends:
-      file: ../../component/alluxio.yml
+      file: ../../component/impala.yml
       service: impalad
