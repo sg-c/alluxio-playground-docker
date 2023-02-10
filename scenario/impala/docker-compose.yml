@@ -11,6 +11,14 @@ volumes:
     external: true
 
 services:
+  namenode:
+    extends:
+      file: ../../component/hadoop.yml
+      service: namenode
+  datanode:
+    extends:
+      file: ../../component/hadoop.yml
+      service: datanode
   mysql:
     extends:
       file: ../../component/mysql.yml
