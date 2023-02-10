@@ -3,38 +3,42 @@ version: "3.11"
 services:
   statestored:
     image: apache/impala:4.0.0-statestored
-    networks:
+    networks: &networks
       custom:
     ports:
       - "25010:25010" # Web debug UI
     hostname: impala-statestored.alluxio.io
-    environment:
+    environment: &environment
       - INTEGRATION_TMP_DIR=/integration/tmp
-    volumes:
+    volumes: &volumes
       - ../config:/config
       - ../entrypoint:/entrypoint
       - ../integration:/integration
     entrypoint: /entrypoint/impala/entrypoint.sh
   catalogd:
-    extends:
-      service: statestored
-    depends_on:
-      - statestored
     image: apache/impala:4.0.0-catalogd
+    networks: *networks
     ports:
       - "25020:25020" # Web debug UI
     hostname: impala-catalogd.alluxio.io
-  impalad:
-    extends:
-      service: statestored
-    image: apache/impala:4.0.0-impalad_coord_exec
+    environment: *environment
+    volumes: *volumes
+    entrypoint: /entrypoint/impala/entrypoint.sh
     depends_on:
       - statestored
-      - catalogd
+  impalad:
+    image: apache/impala:4.0.0-impalad_coord_exec
+    networks: *networks
     ports:
       - "21050:21050" # HS2 endpoint
       - "25000:25000" # Web debug UI
       - "28000:28000" # HS2 over HTTP endpoint.
+    hostname: impala-impalad.alluxio.io
     environment:
       - JAVA_TOOL_OPTIONS="-Xmx1g" # Keep the Java heap small to preserve memory for query execution.
       - INTEGRATION_TMP_DIR=/integration/tmp
+    volumes: *volumes
+    entrypoint: /entrypoint/impala/entrypoint.sh
+    depends_on:
+      - statestored
+      - catalogd
