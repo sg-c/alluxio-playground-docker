@@ -45,7 +45,7 @@ Hive configuration for Impala quickstart docker cluster.
         <name>hive.metastore.warehouse.external.dir</name>
         <value>/user/hive/warehouse/external</value>
       </property>
-      <property>
+      <!-- <property>
         <!-- Required to enable Hive transactions -->
         <name>hive.support.concurrency</name>
         <value>true</value>
@@ -84,5 +84,5 @@ Hive configuration for Impala quickstart docker cluster.
       <property>
         <name>hive.stats.autogather</name>
         <value>false</value>
-      </property>
+      </property> -->
 </configuration>

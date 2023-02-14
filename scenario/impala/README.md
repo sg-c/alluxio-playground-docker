@@ -32,3 +32,5 @@ Get into the impala-shell container and run impala-shell.
      ROW FORMAT DELIMITED
      FIELDS TERMINATED BY ','
      LOCATION 'hdfs://namenode.alluxio.io:9000/user/ava/alluxio_table';
+
+     SELECT * FROM hdfs_table;
