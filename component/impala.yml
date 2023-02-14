@@ -5,7 +5,7 @@ services:
     image: apache/impala:4.0.0-impala_quickstart_hms
     networks: &networks
       custom:
-    hostname: impala-hms.alluixo.io
+    hostname: impala-hms.alluxio.io
     environment: &environment
       - INTEGRATION_TMP_DIR=/integration/tmp
     volumes: &volumes
