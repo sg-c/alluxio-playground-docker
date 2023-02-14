@@ -46,12 +46,10 @@ Hive configuration for Impala quickstart docker cluster.
         <value>/user/hive/warehouse/external</value>
       </property>
       <!-- <property>
-        <!-- Required to enable Hive transactions -->
         <name>hive.support.concurrency</name>
         <value>true</value>
       </property>
       <property>
-        <!-- Required to enable Hive transactions -->
         <name>hive.txn.manager</name>
         <value>org.apache.hadoop.hive.ql.lockmgr.DbTxnManager</value>
       </property>
@@ -79,8 +77,6 @@ Hive configuration for Impala quickstart docker cluster.
         <name>datanucleus.autoCreateSchema</name>
         <value>false</value>
       </property>
-      <!-- Hive stats autogathering negatively affects latency of DDL operations, etc and
-           is not particularly useful for Impala -->
       <property>
         <name>hive.stats.autogather</name>
         <value>false</value>
