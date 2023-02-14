@@ -1,20 +1,29 @@
 version: "3.11"
 
 services:
-  statestored:
-    image: apache/impala:4.0.0-statestored
+  hms:
+    impage: apache/impala:4.0.0-impala_quickstart_hms
     networks: &networks
       custom:
-    ports:
-      - "25010:25010" # Web debug UI
-    hostname: impala-statestored.alluxio.io
+    hostname: impala-hms.alluixo.io
     environment: &environment
       - INTEGRATION_TMP_DIR=/integration/tmp
     volumes: &volumes
       - ../config:/config
       - ../entrypoint:/entrypoint
       - ../integration:/integration
-    entrypoint: /entrypoint/impala/entrypoint.sh
+    entrypoint: &entrypoint /entrypoint/impala/entrypoint.sh
+    command: 
+      - "hms"
+  statestored:
+    image: apache/impala:4.0.0-statestored
+    networks: *networks
+    ports:
+      - "25010:25010" # Web debug UI
+    hostname: impala-statestored.alluxio.io
+    environment: *environment
+    volumes: *volumes
+    entrypoint: *entrypoint
   catalogd:
     image: apache/impala:4.0.0-catalogd
     networks: *networks
@@ -23,9 +32,10 @@ services:
     hostname: impala-catalogd.alluxio.io
     environment: *environment
     volumes: *volumes
-    entrypoint: /entrypoint/impala/entrypoint.sh
+    entrypoint: *entrypoint
     depends_on:
       - statestored
+      - hms
   impalad:
     image: apache/impala:4.0.0-impalad_coord_exec
     networks: *networks
@@ -35,10 +45,11 @@ services:
       - "28000:28000" # HS2 over HTTP endpoint.
     hostname: impala-impalad.alluxio.io
     environment:
-      - JAVA_TOOL_OPTIONS="-Xmx1g" # Keep the Java heap small to preserve memory for query execution.
+      # Keep the Java heap small to preserve memory for query execution.
+      - JAVA_TOOL_OPTIONS="-Xmx1g" 
       - INTEGRATION_TMP_DIR=/integration/tmp
     volumes: *volumes
-    entrypoint: /entrypoint/impala/entrypoint.sh
+    entrypoint: *entrypoint
     depends_on:
       - statestored
       - catalogd
@@ -48,4 +59,4 @@ services:
     hostname: impala-shell.alluxio.io
     environment: *environment
     volumes: *volumes
-    entrypoint: /entrypoint/impala/entrypoint.sh
+    entrypoint: *entrypoint

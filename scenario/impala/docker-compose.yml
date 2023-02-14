@@ -19,22 +19,14 @@ services:
     extends:
       file: ../../component/hadoop.yml
       service: datanode
-  mysql:
-    extends:
-      file: ../../component/mysql.yml
-      service: mysql
   hms:
     extends:
-      file: ../../component/hivemetastore.yml
+      file: ../../component/impala.yml
       service: hms
-    depends_on: 
-      - mysql
   statestored:
     extends:
       file: ../../component/impala.yml
       service: statestored
-    depends_on:
-      - hms
   catalogd:
     extends:
       file: ../../component/impala.yml

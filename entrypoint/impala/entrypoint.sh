@@ -42,6 +42,10 @@ case $(hostname -f) in
         -use_resolved_hostname=true
     echo hi
     ;;
+*hms*)
+    # start hms; the hms-entrypoint is a built-in script in the image
+    /hms-entrypoint.sh hms
+    ;;
 *)
     # do nothing for other containers such as impala-shell
     ;;
