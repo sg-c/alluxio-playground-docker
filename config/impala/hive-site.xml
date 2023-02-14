@@ -33,7 +33,7 @@ Hive configuration for Impala quickstart docker cluster.
       </property>
       <property>
         <name>hive.metastore.uris</name>
-        <value>thrift://hms.alluxio.io:9083</value>
+        <value>thrift://impala-hms.alluxio.io:9083</value>
       </property>
       <!-- Managed and external tablespaces must live on the Docker volumes that we
            configure for the quickstart cluster. -->
