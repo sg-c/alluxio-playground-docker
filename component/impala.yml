@@ -13,8 +13,6 @@ services:
       - ../entrypoint:/entrypoint
       - ../integration:/integration
     entrypoint: &entrypoint /entrypoint/impala/entrypoint.sh
-    command: 
-      - "hms"
   statestored:
     image: apache/impala:4.0.0-statestored
     networks: *networks
