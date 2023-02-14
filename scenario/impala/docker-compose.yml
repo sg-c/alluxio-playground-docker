@@ -19,6 +19,14 @@ services:
     extends:
       file: ../../component/hadoop.yml
       service: datanode
+  alluxio-master:
+    extends:
+      file: ../../component/alluxio.yml
+      service: alluxio-master
+  alluxio-worker:
+    extends:
+      file: ../../component/alluxio.yml
+      service: alluxio-worker
   hms:
     extends:
       file: ../../component/impala.yml

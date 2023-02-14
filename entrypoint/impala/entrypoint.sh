@@ -2,10 +2,10 @@
 
 set -xe
 
-if [ -d /opt/impala/conf ]; then
-    # copy hive-site.xml to impala config dir
-    cp /config/impala/hive-site.xml /opt/impala/conf
-fi
+# if [ -d /opt/impala/conf ]; then
+#     # copy hive-site.xml to impala config dir
+#     cp /config/impala/hive-site.xml /opt/impala/conf
+# fi
 
 case $(hostname -f) in
 *impalad*)
