@@ -105,3 +105,4 @@ Make sure following operations are done.
 - [ ] Add a section for frequently used `docker` and `docker compose` commands.
 - [ ] Refactoring (scenario/security): move the Dockerfile for alluxio to /dockerfile/alluxio dir.
 - [ ] Refactoring (scenario/security): move all scripts for creating principals and associated keytab files to the kdc container to run; put all the keytab files in the the $SHARE_DIR/keytabs/ dir.
+- [ ] Get rid of "diff_cp" in the /integration/common/utils.sh
