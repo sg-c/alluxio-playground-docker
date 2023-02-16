@@ -8,6 +8,12 @@ HADOOP_HOME=/opt/hadoop
 cp /config/hadoop/core-site.xml ${HADOOP_CONF_DIR}/core-site.xml
 cp /config/hadoop/hdfs-site.xml ${HADOOP_CONF_DIR}/hdfs-site.xml
 
+# Add user "alluxio" to the hdfs superusergroup group on namenode
+# The user "alluxio" is used for starting Alluxio processes
+# For details, see https://hadoop.apache.org/docs/r3.1.0/hadoop-project-dist/hadoop-hdfs/HdfsPermissionsGuide.html#The_Super-User
+sudo groupadd supergroup
+sudo useradd --gid supergroup alluxio
+
 # start hdfs processes
 if [[ "$(hostname -f)" == "namenode"* ]]; then
   # format HDFS

@@ -10,4 +10,8 @@
         <name>dfs.datanode.data.dir</name>
         <value>/opt/hadoop/data/datanode</value>
     </property>
+    <property>
+        <name>dfs.permissions.superusergroup</name>
+        <value>supergroup</value>
+    </property>
 </configuration>

@@ -2,6 +2,9 @@
 
 set -xe
 
+# install awscli
+yum -y install awscli
+
 # create alluxio-site.properties
 cp /config/alluxio/alluxio-site.properties /opt/alluxio/conf/alluxio-site.properties
 
