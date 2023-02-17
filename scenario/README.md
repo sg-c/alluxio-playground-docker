@@ -16,3 +16,4 @@ Copy the Alluxio license file to /config/alluxio/license.json
 |--------|-----------|----------|
 |security|Show how to integrate with Kerberos and Ranger.|<ul><li>HDFS</li><li>Presto</li><li>Hive Metastore</li><li>Kerberos</li><li>Ranger</li></ul>|
 |basic|Simple cluster with S3 and Presto for basic Alluxio integration.|<ul><li>Presto</li></ul>|
+|pddm|Show Union Mount and PDDM features with HDFS and S3 UFS.|<ul><li>HDFS</li><li>S3</li></ul>|
