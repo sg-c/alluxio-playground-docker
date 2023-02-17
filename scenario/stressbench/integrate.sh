@@ -3,5 +3,5 @@
 set -x
 
 # set up alluxio using user "alluxio"
-docker exec -w /integration/pddm/alluxio pddm-alluxio-master-1 ./setup-alluxio-master.sh
-docker exec -w /integration/pddm/alluxio pddm-alluxio-worker-1 ./setup-alluxio-worker.sh
+docker exec -w /integration/stressbench/alluxio stressbench-alluxio-master-1 ./setup-alluxio-master.sh
+docker exec -w /integration/stressbench/alluxio stressbench-alluxio-worker-1 ./setup-alluxio-worker.sh
