@@ -1,0 +1,31 @@
+version: '3.11'
+
+networks:
+  custom:
+    name: alluxio-network
+    external: true
+
+volumes:
+  share:
+    name: alluxio-share
+    external: true
+
+services:
+  namenode:
+    extends:
+      file: ../../component/hadoop.yml
+      service: namenode
+  datanode:
+    extends:
+      file: ../../component/hadoop.yml
+      service: datanode
+  alluxio-master:
+    extends:
+      file: ../../component/alluxio.yml
+      service: alluxio-master
+    image: alluxio-playground-docker/security-alluxio-enterprise:2.9.0-1.0
+  alluxio-worker:
+    extends:
+      file: ../../component/alluxio.yml
+      service: alluxio-worker
+    image: alluxio-playground-docker/security-alluxio-enterprise:2.9.0-1.0

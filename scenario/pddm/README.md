@@ -3,16 +3,18 @@
 In this demo, Alluxio is configured for PDDM use case. Both HDFS (root UFS) and S3 (nested UFS) will be mounted to the Alluxio namespace. 
 A few files will be created in HDFS, and eventually, they will be moved to S3 by PDDM after corresponding policy is set up.
 
+# Preparation
+
+Because S3 is used in this scenarios, make sure the you have following things ready:
+* aws access key id & aws secret key
+* S3 bucket to which you have access with above credentials
+
 # Quick start for scenarios "pddm"
 
 Start containers 
     
     cd alluxio-playground-docker/scenario/pddm
     docker-compose up -d
-
-Make sure the you have following things ready:
-* aws access key id & aws secret key
-* S3 bucket to which you have access with above credentials
 
 Run "integrate.sh" script to configure Alluxio, and 
 
