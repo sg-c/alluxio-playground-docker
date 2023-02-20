@@ -34,6 +34,8 @@ Check the created files.
 
     alluxio fs ls /stress-master-base/files/local-task-0
 
+## Run Master StressBench test
+
 Use files just created to test the performance of Master doing GetBlockLocations operation.
 
     time alluxio runClass alluxio.stress.cli.StressMasterBench \
