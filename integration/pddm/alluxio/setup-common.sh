@@ -11,23 +11,6 @@ while [[ $(alluxio fsadmin report >/dev/null && echo $?) != 0 ]]; do
     sleep 3
 done
 
-##########################
-## AWS Credentials file ##
-##########################
-
-aws_cred_file=/integration/pddm/alluxio/credentials
-
-if [[ ! -f $aws_cred_file ]]; then
-    echo ">>> $aws_cred_file is NOT found. See the README.md for creating this file."
-    exit 1 
-fi
-
-
-if [[ ! -d /home/alluxio/.aws ]]; then
-    mkdir /home/alluxio/.aws
-    cp $aws_cred_file /home/alluxio/.aws
-    chown -R alluxio:alluxio /home/alluxio/.aws
-fi
 
 ###########################
 ## Alluxio Configuration ##
