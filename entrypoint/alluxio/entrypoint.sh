@@ -3,7 +3,9 @@
 set -xe
 
 # install awscli
-yum -y install awscli
+if [[ $(command -v yum) != "" ]]; then
+    yum -y install awscli
+fi
 
 # create alluxio-site.properties
 cp /config/alluxio/alluxio-site.properties /opt/alluxio/conf/alluxio-site.properties

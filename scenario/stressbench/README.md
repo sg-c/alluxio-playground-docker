@@ -17,7 +17,7 @@ Run "integrate.sh" script to configure Alluxio, and
 
     docker exec -it stressbench-alluxio-master-1 bash
 
-# Run comprehensive stressbench test
+# Run master stressbench test
 
 This test requires Alluxio 2.9+.
 
@@ -32,11 +32,11 @@ Execute following command to create test files by StressBench.
 
 Check the created files.
 
-    alluxio fs ls /stress-master-base/files/local-task-0
+    alluxio fs ls /stress-master-base/files/local-task-0 | head
 
 ## Run Master StressBench test
 
 Use files just created to test the performance of Master doing GetBlockLocations operation.
 
     time alluxio runClass alluxio.stress.cli.StressMasterBench \
-    --operation GetBlockLocations
+    --operation GetFileStatus
