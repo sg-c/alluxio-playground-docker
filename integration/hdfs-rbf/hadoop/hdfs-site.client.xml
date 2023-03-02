@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<!-- 
+    It's important to separate hdfs-site.xml for server use and hdfs-site.client.xml for client use. 
+    It seems that the DFSRouter will have some conflict and cannot work as expected if you merge
+    hdfs-site.xml and hdfs-site.client.xml and use the merged one for starting HDFS NN and DFSRouter.
+-->
+
+<configuration>
+    <property>
+        <name>dfs.nameservices</name>
+        <value>ns1,ns2,ns-fed</value>
+    </property>
+
+    <property>
+        <name>dfs.ha.namenodes.ns-fed</name>
+        <value>r1,r2</value>
+    </property>
+    <property>
+        <name>dfs.namenode.rpc-address.ns-fed.r1</name>
+        <value>namenode.beijing.io:8888</value>
+    </property>
+    <property>
+        <name>dfs.namenode.rpc-address.ns-fed.r2</name>
+        <value>namenode.shanghai.io:8888</value>
+    </property>
+    <property>
+        <name>dfs.client.failover.proxy.provider.ns-fed</name>
+        <value>org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider</value>
+    </property>
+    <property>
+        <name>dfs.client.failover.random.order</name>
+        <value>true</value>
+    </property>
+</configuration>

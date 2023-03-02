@@ -4,9 +4,12 @@ set -xe
 
 HADOOP_HOME=/opt/hadoop
 
+# import eval_read function
+source /entrypoint/utils.sh
+
 # copy local config files to hadoop config dir
-cp /config/hadoop/core-site.xml ${HADOOP_CONF_DIR}/core-site.xml
-cp /config/hadoop/hdfs-site.xml ${HADOOP_CONF_DIR}/hdfs-site.xml
+eval_read /config/hadoop/core-site.xml >${HADOOP_CONF_DIR}/core-site.xml
+eval_read /config/hadoop/hdfs-site.xml >${HADOOP_CONF_DIR}/hdfs-site.xml
 
 # Add user "alluxio" to the hdfs superusergroup group on namenode
 # The user "alluxio" is used for starting Alluxio processes
@@ -36,6 +39,9 @@ else
   HADOOP_LOG=${HADOOP_LOG_DIR}/hadoop-datanode.log
   hdfs --daemon start datanode >${HADOOP_LOG} 2>&1
 fi
+
+# create flag file for the completion of entrypoint
+touch /tmp/entrypoint-done
 
 # wait forever
 while true; do sleep 100; done

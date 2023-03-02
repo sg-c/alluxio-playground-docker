@@ -4,6 +4,6 @@
 <configuration>
     <property>
         <name>fs.defaultFS</name>
-        <value>hdfs://namenode.$(hostname -d):9000</value>
+        <value>hdfs://ns-fed</value>
     </property>
 </configuration>

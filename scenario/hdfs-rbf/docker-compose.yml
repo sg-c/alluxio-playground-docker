@@ -1,0 +1,76 @@
+version: '3.11'
+
+networks:
+  custom:
+    name: alluxio-network
+    external: true
+
+volumes:
+  share:
+    name: alluxio-share
+    external: true
+  state-store:
+
+services:
+  namenode-beijing:
+    extends:
+      file: ../../component/hadoop.yml
+      service: namenode
+    hostname: namenode.beijing.io
+    networks:
+      custom:
+        ipv4_address: 172.22.0.2
+    extra_hosts: &extra_hosts
+      - "namenode.beijing.io: 172.22.0.2"
+      - "datanode.beijing.io: 172.22.0.3"
+      - "namenode.shanghai.io: 172.22.0.4"
+      - "datanode.shanghai.io: 172.22.0.5"
+      - "client.us.io: 172.22.0.6"
+    volumes:
+      - state-store:/tmp/dfs-state-store-dir
+  datanode-beijing:
+    extends:
+      file: ../../component/hadoop.yml
+      service: datanode
+    hostname: datanode.beijing.io
+    networks:
+      custom:
+        ipv4_address: 172.22.0.3
+    extra_hosts: *extra_hosts
+  namenode-shanghai:
+    extends:
+      file: ../../component/hadoop.yml
+      service: namenode
+    hostname: namenode.shanghai.io
+    networks:
+      custom:
+        ipv4_address: 172.22.0.4
+    extra_hosts: *extra_hosts
+    volumes:
+      - state-store:/tmp/dfs-state-store-dir
+  datanode-shanghai:
+    extends:
+      file: ../../component/hadoop.yml
+      service: datanode
+    hostname: datanode.shanghai.io
+    networks:
+      custom:
+        ipv4_address: 172.22.0.5
+    extra_hosts: *extra_hosts
+  hdfs-client:
+    extends:
+      file: ../../component/hadoop.yml
+      service: namenode
+    hostname: client.us.io
+    networks:
+      custom:
+        ipv4_address: 172.22.0.6
+    extra_hosts: *extra_hosts
+  alluxio-master:
+    extends:
+      file: ../../component/alluxio.yml
+      service: alluxio-master
+  alluxio-worker:
+    extends:
+      file: ../../component/alluxio.yml
+      service: alluxio-worker
