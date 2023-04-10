@@ -21,15 +21,15 @@ services:
       service: namenode
     networks:
       custom:
-        ipv4_address: 172.22.0.2
+        ipv4_address: 172.23.0.2
         aliases:
           - namenode.alluxio.io
     hostname: namenode.${DOMAIN}
     extra_hosts: &extra_hosts
-      - "namenode.${DOMAIN}: 172.22.0.2"
-      - "datanode.${DOMAIN}: 172.22.0.3"
-      - "alluxio-master.${DOMAIN}: 172.22.0.4"
-      - "alluxio-worker.${DOMAIN}: 172.22.0.5"
+      - "namenode.${DOMAIN}: 172.23.0.2"
+      - "datanode.${DOMAIN}: 172.23.0.3"
+      - "alluxio-master.${DOMAIN}: 172.23.0.4"
+      - "alluxio-worker.${DOMAIN}: 172.23.0.5"
     environment: &environment
       - DOMAIN=${DOMAIN}
       - REALM=${REALM}
@@ -42,7 +42,7 @@ services:
       service: datanode
     networks:
       custom:
-        ipv4_address: 172.22.0.3
+        ipv4_address: 172.23.0.3
         aliases:
           - datanode.alluxio.io
     hostname: datanode.${DOMAIN}
@@ -55,7 +55,7 @@ services:
     image: alluxio-playground-docker/security-alluxio-enterprise:2.9.0-1.0
     networks:
       custom:
-        ipv4_address: 172.22.0.4
+        ipv4_address: 172.23.0.4
         aliases:
           - alluxio-master.alluxio.io
     hostname: alluxio-master.${DOMAIN}
@@ -68,7 +68,7 @@ services:
     image: alluxio-playground-docker/security-alluxio-enterprise:2.9.0-1.0
     networks:
       custom:
-        ipv4_address: 172.22.0.5
+        ipv4_address: 172.23.0.5
         aliases:
           - alluxio-worker.alluxio.io
     hostname: alluxio-worker.${DOMAIN}
@@ -80,7 +80,7 @@ services:
       service: mysql
     networks:
       custom:
-        ipv4_address: 172.22.0.6
+        ipv4_address: 172.23.0.6
         aliases:
           - mysql.alluxio.io
     hostname: mysql.${DOMAIN}
@@ -93,7 +93,7 @@ services:
       - mysql
     networks:
       custom:
-        ipv4_address: 172.22.0.7
+        ipv4_address: 172.23.0.7
         aliases:
           - hms.alluxio.io
     hostname: hms.${DOMAIN}
@@ -105,7 +105,7 @@ services:
       service: presto
     networks:
       custom:
-        ipv4_address: 172.22.0.8
+        ipv4_address: 172.23.0.8
         aliases:
           - presto.alluxio.io
     hostname: presto.${DOMAIN}
