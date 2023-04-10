@@ -30,8 +30,8 @@ You can start from the `./integrate.sh` and checkout scripts it executes to see 
 
 Run following commands to create 2 user principals for "ava" and "bob" with password "changeme". (Run the command below on host instead of in container; similarly hereafter)
 
-    docker exec realm-sm-kdc-1 kadmin -p admin/admin -w admin -q "addprinc -pw changeme ava@BEIJING.COM"
-    docker exec realm-sm-kdc-1 kadmin -p admin/admin -w admin -q "addprinc -pw changeme bob@BEIJING.COM"
+    docker exec realm-sm-kdc-1 kadmin -p admin/admin -w admin -q "addprinc -pw changeme ava@SANMATEO.COM"
+    docker exec realm-sm-kdc-1 kadmin -p admin/admin -w admin -q "addprinc -pw changeme bob@SANMATEO.COM"
     
 # Try out Kerberos integration.
 ## Kerberized HDFS
@@ -114,7 +114,7 @@ Create a table in Hive that points to the HDFS location
           phone STRING ) 
      ROW FORMAT DELIMITED
      FIELDS TERMINATED BY ','
-     LOCATION 'hdfs://namenode.beijing.com:9000/user/ava/alluxio_table';
+     LOCATION 'hdfs://namenode.sanmateo.com:9000/user/ava/alluxio_table';
 
 Create a table in Hive that points to the Alluxio virtual filesystem 
 
@@ -127,7 +127,7 @@ Create a table in Hive that points to the Alluxio virtual filesystem
           phone STRING ) 
      ROW FORMAT DELIMITED
      FIELDS TERMINATED BY ','
-     LOCATION 'alluxio://alluxio-master.beijing.com:19998/user/ava/alluxio_table';
+     LOCATION 'alluxio://alluxio-master.sanmateo.com:19998/user/ava/alluxio_table';
 
 # Kerberized Presto (with Hive Connector)
 
